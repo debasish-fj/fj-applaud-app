@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Confetti from "react-confetti";
 import Link from "next/link";
 import { LuSparkles, LuCheck, LuPencil, LuChevronRight } from "react-icons/lu";
 import { useTheme } from "../context/theme";
@@ -34,19 +33,6 @@ import type {
   NominationFormSchema,
   RatingScore,
 } from "../lib/api-types";
-
-/* ─── Constants ───────────────────────────────────────────────── */
-
-const CONFETTI_COLORS = [
-  "#c8982e",
-  "#e8c870",
-  "#ffd700",
-  "#daa83c",
-  "#86efac",
-  "#6ee7b7",
-  "#ffffff",
-  "#f0f4f8",
-];
 
 /* ─── Helpers ─────────────────────────────────────────────────── */
 
@@ -421,7 +407,6 @@ export default function ReviewClient() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
   /* ── Wizard state ── */
@@ -480,9 +465,7 @@ export default function ReviewClient() {
         values_rating: ratings.values as RatingScore,
         values_note: notes.values,
       });
-      setShowConfetti(true);
       setSubmitted(true);
-      setTimeout(() => setShowConfetti(false), 6000);
     } catch (err: unknown) {
       const e = err as {
         response?: { status: number; data?: Record<string, string[]> };
@@ -500,7 +483,6 @@ export default function ReviewClient() {
 
   const handleSubmitAnother = () => {
     setSubmitted(false);
-    setShowConfetti(false);
     setJustification("");
     setCurrentStep(0);
     setStepError("");
@@ -1306,25 +1288,6 @@ export default function ReviewClient() {
           })}
         </motion.div>
       </Container>
-
-      {/* Confetti */}
-      {showConfetti && (
-        <Confetti
-          width={windowSize.width}
-          height={windowSize.height}
-          recycle={false}
-          numberOfPieces={480}
-          gravity={0.17}
-          colors={CONFETTI_COLORS}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            zIndex: 9998,
-            pointerEvents: "none",
-          }}
-        />
-      )}
 
       {/* Success overlay */}
       <AnimatePresence>
