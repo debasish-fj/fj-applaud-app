@@ -4,6 +4,7 @@ import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { LuTrophy } from "react-icons/lu";
+import ReactConfetti from "react-confetti";
 import { useTheme } from "../context/theme";
 import { getLeaderboard } from "../lib/api";
 
@@ -126,6 +127,14 @@ export default function LeaderboardClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [barReady, setBarReady] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(true);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    const timer = setTimeout(() => setShowConfetti(false), 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     getLeaderboard()
@@ -158,6 +167,16 @@ export default function LeaderboardClient() {
 
   return (
     <Box minH="100vh" color="var(--fg-1)">
+      {showConfetti && (
+        <ReactConfetti
+          width={windowSize.width}
+          height={windowSize.height}
+          numberOfPieces={300}
+          recycle={false}
+          gravity={0.25}
+          style={{ position: "fixed", top: 0, left: 0, zIndex: 9999, pointerEvents: "none" }}
+        />
+      )}
       {/* ── Page header ── */}
       <Container maxW="3xl" px="6" pt="12" pb="2">
         <motion.div
