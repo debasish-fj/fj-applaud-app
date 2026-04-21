@@ -243,7 +243,7 @@ export default function LoginClient() {
                     letterSpacing="0.06em"
                     textTransform="uppercase"
                   >
-                    April 2026 · Nominations open
+                    FISCHERJORDAN APPLAUD
                   </Text>
                 </Flex>
               </motion.div>
