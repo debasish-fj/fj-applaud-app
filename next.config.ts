@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         hostname: "fischerjordan.com",
         pathname: "/wp-content/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };
