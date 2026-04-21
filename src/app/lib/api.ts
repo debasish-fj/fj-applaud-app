@@ -223,6 +223,34 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
   return data;
 }
 
+/**
+ * Server-side: get the leaderboard using a backend token directly.
+ * GET /api/rewards/leaderboard/
+ */
+export async function getLeaderboardServer(
+  token: string,
+): Promise<LeaderboardEntry[]> {
+  const { data } = await apiClient.get<LeaderboardEntry[]>(
+    "/api/rewards/leaderboard/",
+    { headers: { Authorization: `Token ${token}` } },
+  );
+  return data;
+}
+
+/**
+ * Server-side: get the currently active week using a backend token directly.
+ * GET /api/rewards/weeks/current/
+ */
+export async function getCurrentWeekServer(
+  token: string,
+): Promise<CurrentWeek> {
+  const { data } = await apiClient.get<CurrentWeek>(
+    "/api/rewards/weeks/current/",
+    { headers: { Authorization: `Token ${token}` } },
+  );
+  return data;
+}
+
 // ─── Admin-only ───────────────────────────────────────────────────────────────
 
 /**
