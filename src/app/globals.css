@@ -1,39 +1,230 @@
 @import "tailwindcss";
 
-:root {
-  --background: #1e2d36;
-  --foreground: #f9fafb;
-  --app-bg-start: #263844;
-  --app-bg-end: #1e2d36;
-  --app-accent: #c5972b;
-  --app-accent-hover: #d4a83a;
-  --app-accent-muted: rgba(197, 151, 43, 0.15);
-  --app-gradient: linear-gradient(to right, #263844, #1e2d36);
+/* ─── FJ Brand color tokens (Tailwind v4 @theme — matches ATS-fj) ── */
+@theme {
+  --color-fj-dark:         #263844;
+  --color-fj-dark-light:   #334554;
+  --color-fj-dark-lighter: #3d5162;
+  --color-fj-dark-dark:    #1e2d38;
+  --color-fj-bg-light:     #e8ecf0;
+  --color-fj-gold:         #C5972C;
+  --color-fj-gold-light:   #d4a83d;
+  --color-fj-gold-dark:    #a67d25;
+  --color-fj-gold-muted:   #C5972C1F; /* ~12% opacity */
 }
 
+/* ─── Design tokens — dark (default) ────────────────────────────── */
+:root, html.dark {
+  /* Background — ATS-fj fj-dark-dark / fj-dark */
+  --background: #18262f;
+  --app-gradient: linear-gradient(160deg, #233140 0%, #18262f 60%, #1a2b36 100%);
+
+  /* Accent — ATS-fj brand gold */
+  --app-accent: #d4a83d;
+  --app-accent-hover: #e0b84d;
+  --app-accent-muted: rgba(212, 168, 61, 0.14);
+  --app-accent-border: rgba(212, 168, 61, 0.35);
+
+  /* Foreground / text — boosted for strong readability */
+  --fg-1: rgba(255, 255, 255, 0.97);   /* Heading / primary */
+  --fg-2: rgba(255, 255, 255, 0.82);   /* Body / secondary */
+  --fg-3: rgba(255, 255, 255, 0.62);   /* Caption / label */
+  --fg-4: rgba(255, 255, 255, 0.44);   /* Muted / hint */
+  --fg-5: rgba(255, 255, 255, 0.28);   /* Placeholder */
+
+  /* Surfaces — built on ATS-fj fj-dark-* family */
+  --sur-1: rgba(255, 255, 255, 0.055); /* Card */
+  --sur-2: rgba(255, 255, 255, 0.09);  /* Elevated card */
+  --sur-3: rgba(255, 255, 255, 0.13);  /* Hover / pressed */
+  --sur-header: rgba(24, 38, 47, 0.88);        /* fj-dark-dark */
+  --sur-dropdown: rgba(22, 34, 44, 0.98);       /* fj-dark-dark tinted */
+  --sur-modal: linear-gradient(160deg, #263844 0%, #1a2836 100%);  /* fj-dark → fj-dark-dark */
+  --sur-modal-green: linear-gradient(160deg, #1e3530 0%, #1a2836 100%);
+  --sur-login: rgba(24, 38, 47, 0.92);          /* fj-dark-dark */
+  --sur-page-header: rgba(51, 69, 84, 0.94);    /* fj-dark-light */
+  --overlay-bg: rgba(10, 18, 24, 0.88);
+
+  /* Borders */
+  --bdr-1: rgba(255, 255, 255, 0.10);  /* Subtle */
+  --bdr-2: rgba(255, 255, 255, 0.17);  /* Regular */
+  --bdr-3: rgba(255, 255, 255, 0.28);  /* Strong */
+
+  /* Shadows — ATS-fj gold (#d4a83d) */
+  --shadow-accent: 0 4px 28px -4px rgba(212, 168, 61, 0.5);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.28), 0 8px 28px -8px rgba(0,0,0,0.52);
+  --shadow-header: 0 1px 0 rgba(255,255,255,0.08);
+  --shadow-dropdown: 0 16px 48px -8px rgba(0,0,0,0.80);
+  --shadow-login: 0 32px 80px -16px rgba(0,0,0,0.88);
+}
+
+/* ─── Design tokens — light (ATS-fj fj-bg-light + fj-gold-dark) ─── */
+html.light {
+  /* Background — ATS-fj fj-bg-light: #e8ecf0 */
+  --background: #e4e9ef;
+  --app-gradient: linear-gradient(160deg, #edf1f6 0%, #e4e9ef 100%);
+
+  /* Accent — ATS-fj fj-gold-dark / fj-gold */
+  --app-accent: #9e7220;
+  --app-accent-hover: #b88428;
+  --app-accent-muted: rgba(158, 114, 32, 0.10);
+  --app-accent-border: rgba(158, 114, 32, 0.30);
+
+  /* Foreground — dark navy base (fj-dark: #263844) */
+  --fg-1: rgba(22, 36, 46, 0.97);
+  --fg-2: rgba(22, 36, 46, 0.80);
+  --fg-3: rgba(22, 36, 46, 0.60);
+  --fg-4: rgba(22, 36, 46, 0.42);
+  --fg-5: rgba(22, 36, 46, 0.24);
+
+  /* Surfaces */
+  --sur-1: rgba(255, 255, 255, 0.75);
+  --sur-2: rgba(255, 255, 255, 0.90);
+  --sur-3: rgba(38, 56, 68, 0.05);
+  --sur-header: rgba(255, 255, 255, 0.88);
+  --sur-dropdown: rgba(255, 255, 255, 0.99);
+  --sur-modal: linear-gradient(160deg, #f4f7fa 0%, #e8ecf0 100%);
+  --sur-modal-green: linear-gradient(160deg, #ecfaf4 0%, #ddf0e8 100%);
+  --sur-login: rgba(255, 255, 255, 0.94);
+  --sur-page-header: rgba(255, 255, 255, 0.97);
+  --overlay-bg: rgba(180, 196, 210, 0.82);
+
+  --bdr-1: rgba(22, 36, 46, 0.10);
+  --bdr-2: rgba(22, 36, 46, 0.17);
+  --bdr-3: rgba(22, 36, 46, 0.28);
+
+  --shadow-accent: 0 4px 24px -4px rgba(158, 114, 32, 0.36);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px -8px rgba(0,0,0,0.13);
+  --shadow-header: 0 1px 0 rgba(22,36,46,0.10);
+  --shadow-dropdown: 0 16px 48px -8px rgba(0,0,0,0.18);
+  --shadow-login: 0 32px 80px -16px rgba(0,0,0,0.20);
+}
+
+/* ─── Tailwind color & font bridge ──────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground: var(--fg-1);
+  /* Geist (ATS-fj) as primary UI font, Montserrat as fallback */
+  --font-sans: var(--font-geist-sans), var(--font-montserrat);
+  --font-mono: var(--font-geist-mono), var(--font-mono);
 }
 
-html.dark {
-  --background: #1e2d36;
-  --foreground: #f9fafb;
+/* ─── Base ───────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+* {
+  scrollbar-width: thin;
+  /* ATS-fj gold (#C5972C) scrollbar thumb */
+  scrollbar-color: rgba(197, 151, 44, 0.25) transparent;
 }
+*::-webkit-scrollbar { width: 5px; height: 5px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: rgba(197, 151, 44, 0.25); border-radius: 99px; }
+*::-webkit-scrollbar-thumb:hover { background: rgba(197, 151, 44, 0.45); }
+
+/* Dark mode: stronger ATS-fj gold scrollbar on fj-dark-light track */
+html.dark *::-webkit-scrollbar-thumb { background: rgba(197, 151, 44, 0.35); }
+html.dark *::-webkit-scrollbar-thumb:hover { background: #C5972C; }
 
 body {
   background: var(--app-gradient);
   background-attachment: fixed;
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  color: var(--fg-1);
+  /* Geist (ATS-fj) primary, Montserrat fallback */
+  font-family: var(--font-geist-sans), var(--font-montserrat), Montserrat, system-ui, sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.4s ease, color 0.3s ease;
 }
 
-/* Radio / checkbox accent when checked */
+/* Raleway for all heading elements — premium display */
+h1, h2, h3, h4, h5, h6,
+.heading, [data-heading] {
+  font-family: var(--font-raleway), Raleway, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ─── Chakra radio indicator ─────────────────────────────────────── */
 [data-state="checked"] [data-part="indicator"],
 [data-part="indicator"][data-state="checked"] {
   background: var(--app-accent) !important;
   border-color: var(--app-accent) !important;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────────── */
+@keyframes spin       { to { transform: rotate(360deg); } }
+@keyframes fadeUp     { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn     { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn    { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes springUp   {
+  0%   { opacity: 0; transform: scale(0.78) translateY(48px); }
+  55%  { opacity: 1; transform: scale(1.03) translateY(-6px); }
+  75%  { transform: scale(0.99) translateY(2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes pulseGlow  { 0%,100% { box-shadow: 0 0 0 0 rgba(197,151,44,0.28); } 50% { box-shadow: 0 0 0 8px rgba(197,151,44,0); } }
+@keyframes pulseDot   { 0%,100% { box-shadow: 0 0 0 0 rgba(197,151,44,0.7); transform: scale(1); } 50% { box-shadow: 0 0 0 5px rgba(197,151,44,0); transform: scale(1.15); } }
+@keyframes shimmer    { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+@keyframes floatGlow  { 0%,100% { transform: translateY(0) scale(1); opacity: 0.07; } 50% { transform: translateY(-12px) scale(1.05); opacity: 0.11; } }
+@keyframes floatOrb1  { 0%,100% { transform: translate(0,0) scale(1); } 40% { transform: translate(30px,-24px) scale(1.06); } 75% { transform: translate(-18px,20px) scale(0.95); } }
+@keyframes floatOrb2  { 0%,100% { transform: translate(0,0) scale(1); } 35% { transform: translate(-28px,22px) scale(1.08); } 70% { transform: translate(22px,-18px) scale(0.93); } }
+
+/* ─── Utility classes ────────────────────────────────────────────── */
+.animate-fadeUp   { animation: fadeUp   0.45s cubic-bezier(0.2,0,0,1) both; }
+.animate-scaleIn  { animation: scaleIn  0.35s cubic-bezier(0.2,0,0,1) both; }
+.animate-springUp { animation: springUp 0.55s cubic-bezier(0.2,0,0,1) both; }
+
+.font-heading {
+  font-family: var(--font-raleway), Raleway, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: var(--font-geist-sans), var(--font-montserrat), Montserrat, system-ui, sans-serif;
+}
+
+/* ATS-fj brand gold gradient — dark: bright gold, light: deep amber */
+.text-gradient {
+  background: linear-gradient(135deg, #f0cb6a 0%, #d4a83d 45%, #c8982e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html.light .text-gradient {
+  background: linear-gradient(135deg, #b88428 0%, #9e7220 55%, #7a5618 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold glow utility for accent elements */
+.accent-glow {
+  filter: drop-shadow(0 0 8px rgba(212, 168, 61, 0.4));
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.22);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+html.light .spinner {
+  border: 2px solid rgba(166, 125, 37, 0.2);
+  border-top-color: var(--app-accent);
+}
+
+/* ─── Smooth theme transition ────────────────────────────────────── */
+*, *::before, *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease, box-shadow 0.25s ease;
+}
+/* But NOT transitions on transforms/opacity (breaks motion) */
+[style*="transform"], [data-framer-component-type] {
+  transition: none !important;
 }
